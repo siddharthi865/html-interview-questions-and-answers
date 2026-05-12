@@ -8,6 +8,10 @@
 | 4.    | [What is the basic structure of an HTML document?](#question-4-what-is-the-basic-structure-of-an-html-document)   |
 | 5.    | [What is the purpose of `<!DOCTYPE html>`?](#question-5-what-is-the-purpose-of-doctype-html)                      |
 | 6.    | [What is the difference between `<head>` and `<body>`?](#question-6-what-is-the-difference-between-head-and-body) |
+| 7.    | [What are HTML elements?](#question-7-what-are-html-elements)                                                     |
+| 8.    | [What are HTML tags?](#question-8-what-are-html-tags)                                                             |
+| 9.    | [What is the difference between tags and elements?](#question-9-what-is-the-difference-between-tags-and-elements) |
+| 10.   | [What are attributes in HTML?](#question-10-what-are-attributes-in-html)                                          |
 
 ## Question 1. What is HTML?
 
@@ -572,3 +576,472 @@
 1. **Putting visible content in `<head>`** → ignored or moved by browser parser
 2. **Loading blocking scripts in `<head>` without `defer`/`async`** → delays rendering
 3. **Misusing `<body>` for metadata (SEO tags, title, links)** → breaks document semantics and discoverability
+
+## Question 7. What are HTML elements?
+
+> HTML elements are the **building blocks of a web page**, defined by a start tag, content, and an end tag (or self-closing syntax). Each element represents a specific meaning or function in the document structure, such as headings, paragraphs, links, or images.
+
+**Production Implementation:**
+
+1. **HTML5.3 Standard**
+   Reference: [https://html.spec.whatwg.org/multipage/dom.html#elements](https://html.spec.whatwg.org/multipage/dom.html#elements)
+   In the HTML living standard, an element is a structured node in the DOM tree consisting of a tag name, attributes, and content that defines document semantics.
+
+2. **Semantic Approach**
+
+   **Anatomy of an HTML element:**
+
+   ```html
+   <p class="intro">Hello world</p>
+   ```
+
+   - `<p>` → opening tag (defines element type)
+   - `class="intro"` → attributes (metadata about the element)
+   - `Hello world` → content (what is displayed)
+   - `</p>` → closing tag
+
+   **Types of elements:**
+   - **Block-level elements** (structure the page):
+     - `<div>`, `<section>`, `<article>`, `<header>`, `<main>`
+   - **Inline elements** (flow within text):
+     - `<span>`, `<a>`, `<strong>`, `<em>`
+   - **Void (self-closing) elements**:
+     - `<img>`, `<input>`, `<br>`, `<meta>`
+
+   > Modern HTML prioritizes **semantic elements** over generic containers.
+
+3. **Performance**
+
+   HTML elements directly impact rendering performance:
+   - Deeply nested elements → slower layout calculations
+   - Semantic elements → better browser optimization of accessibility tree
+   - Fewer DOM nodes → faster rendering and repaint
+   - Void elements (like `<img>`) load independently and can be lazy-loaded:
+
+   ```html
+   <img src="photo.jpg" loading="lazy" alt="Description" />
+   ```
+
+   - Efficient structure improves:
+   - Time to First Render (TTFR)
+   - Layout stability (CLS reduction)
+
+4. **Accessibility**
+
+   HTML elements are the foundation of accessibility:
+   - Screen readers interpret elements as semantic roles:
+     - `<button>` → interactive control
+     - `<h1>` → page heading landmark
+     - `<nav>` → navigation region
+
+   - Proper element choice reduces need for ARIA:
+     - Prefer `<button>` over `<div role="button">`
+     - Use `<label>` for form inputs
+     - Use heading hierarchy for navigation
+
+**Code Example:**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML Elements Example</title>
+  </head>
+
+  <body>
+    <!-- Structural (block-level elements) -->
+    <header>
+      <h1>HTML Elements</h1>
+    </header>
+
+    <main>
+      <section>
+        <h2>What is an Element?</h2>
+
+        <!-- Paragraph element -->
+        <p>An HTML element consists of a start tag, content, and an end tag.</p>
+
+        <!-- Inline element inside paragraph -->
+        <p>
+          Visit the
+          <a href="https://html.spec.whatwg.org/">HTML specification</a>
+          for details.
+        </p>
+
+        <!-- Void element -->
+        <img src="example.png" alt="Example diagram" loading="lazy" />
+
+        <!-- Form element -->
+        <form>
+          <label for="email">Email</label>
+          <input id="email" type="email" required />
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <small>&copy; 2026</small>
+    </footer>
+  </body>
+</html>
+```
+
+**Browser Support:**
+
+- All HTML elements are interpreted by browsers via the HTML parser (not version-dependent in modern HTML)
+- Newer semantic elements (like `<main>`, `<section>`) are supported in all evergreen browsers
+- Unknown elements are treated as inline by default (custom elements supported via Web Components)
+
+**Common Pitfalls:**
+
+1. **Using `<div>` for everything** → loses semantic meaning and harms accessibility
+2. **Incorrect nesting of elements** → invalid DOM structure (e.g., block inside inline without care)
+3. **Ignoring semantic intent** → using elements purely for styling instead of meaning
+
+## Question 8. What are HTML tags?
+
+> HTML tags are the **syntactic markers** used to define the start and end of HTML elements. They are written inside angle brackets (e.g., `<p>`, `</p>`) and tell the browser how to interpret and structure content, but they are not the elements themselves.
+
+**Production Implementation:**
+
+1. **HTML5.3 Standard**
+   Reference: [https://html.spec.whatwg.org/multipage/syntax.html#syntax-elements](https://html.spec.whatwg.org/multipage/syntax.html#syntax-elements)
+   In the HTML living standard, tags are part of the syntax used to construct **elements**, which then form the DOM tree.
+
+2. **Semantic Approach**
+
+   **Tags vs Elements (important distinction)**
+
+   | Concept        | Meaning                            | Example                       |
+   | -------------- | ---------------------------------- | ----------------------------- |
+   | **Tag**        | Syntax marker                      | `<p>` or `</p>`               |
+   | **Element**    | Complete structure (tag + content) | `<p>Hello</p>`                |
+   | **Node (DOM)** | Runtime representation in browser  | Parsed element in memory tree |
+
+   ### Types of HTML tags
+
+   #### 1. Opening tag
+
+   Defines the start of an element:
+
+   ```html
+   <p></p>
+   ```
+
+   #### 2. Closing tag
+
+   Defines the end of an element:
+
+   ```html
+   </p>
+   ```
+
+   #### 3. Self-closing (void) tags
+
+   Do not require a closing tag:
+
+   ```html
+   <img />
+   <input />
+   <br />
+   <meta />
+   ```
+
+   > Key point: **Tags are syntax; elements are meaning.**
+
+3. **Performance**
+
+   While tags themselves don’t affect performance directly, they influence how efficiently the browser parses HTML:
+   - Well-formed tags → faster parsing and DOM construction
+   - Incorrect or missing closing tags → browser auto-correction adds parsing overhead
+   - Void tags reduce DOM complexity (no children nodes)
+   - Proper structure improves:
+     - DOM tree stability
+     - Render tree construction speed
+
+4. **Accessibility**
+
+   Tags indirectly impact accessibility by defining correct elements:
+   - `<button>` tag → creates an interactive control in accessibility tree
+   - `<h1>`–`<h6>` tags → build document outline for screen readers
+   - `<label>` tags → associate form inputs for assistive tech
+
+   Incorrect or missing tags can:
+   - Break semantic mapping
+   - Force reliance on ARIA (less ideal than native semantics)
+
+**Code Example:**
+
+```html id="html-tags-example"
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML Tags Example</title>
+  </head>
+
+  <body>
+    <!-- Opening and closing tags form an element -->
+    <p>This is a paragraph element.</p>
+
+    <!-- Self-closing (void) tag -->
+    <img src="image.jpg" alt="Example image" />
+
+    <!-- Nested tags forming structured elements -->
+    <a href="https://example.com"> Click here </a>
+
+    <!-- Form example -->
+    <form>
+      <label for="name">Name</label>
+      <input id="name" type="text" />
+    </form>
+  </body>
+</html>
+```
+
+**Browser Support:**
+
+- All HTML tags are universally supported as part of the HTML parsing algorithm
+- Unknown tags are treated as generic inline elements (useful for Web Components)
+- Void tags must not have closing tags in strict parsing mode, though browsers are forgiving
+
+**Common Pitfalls:**
+
+1. **Confusing tags with elements** → tags are syntax, elements are DOM structures
+2. **Missing closing tags in non-void elements** → causes unpredictable DOM correction
+3. **Using invalid nesting** → browser silently fixes structure, leading to layout bugs
+
+## Question 9. What is the difference between tags and elements?
+
+> HTML tags are the **syntax markers** (like `<p>` and `</p>`), while an HTML element is the **complete structure** that includes the tags plus the content between them. In short: tags are the brackets; elements are the actual DOM structure the browser creates.
+
+**Production Implementation:**
+
+1. **HTML5.3 Standard**
+   Reference: [https://html.spec.whatwg.org/multipage/dom.html#elements](https://html.spec.whatwg.org/multipage/dom.html#elements)
+   The HTML specification defines an **element** as a node in the DOM tree created from parsed tags, attributes, and content. Tags are just part of the parsing syntax.
+
+2. **Semantic Approach**
+
+   ### Clear distinction
+
+   | Concept     | Definition                    | Example         |
+   | ----------- | ----------------------------- | --------------- |
+   | **Tag**     | Syntax used in HTML source    | `<p>` or `</p>` |
+   | **Element** | Full structured object in DOM | `<p>Hello</p>`  |
+
+   ### Breakdown
+
+   **Tags (source code level)**
+   - Opening tag: `<h1>`
+   - Closing tag: `</h1>`
+   - Self-closing tag: `<img />`
+
+   > Tags exist only in the HTML markup text.
+
+   **Elements (browser / DOM level)**
+
+   An element includes:
+   - Opening tag
+   - Content
+   - Closing tag (if applicable)
+   - Attributes
+   - DOM representation in memory
+
+     Example:
+
+     ```html id="element-example"
+     <p class="intro">Hello world</p>
+     ```
+
+     This becomes a **DOM element node** like:
+     - Type: paragraph element
+     - Attributes: class="intro"
+     - Content: "Hello world"
+
+3. **Performance**
+
+   Understanding this difference matters for rendering:
+   - Browser parses **tags → builds DOM elements**
+   - More invalid tags → more corrective parsing overhead
+   - Clean tag structure → faster DOM construction
+   - Void tags (`<img>`, `<input>`) reduce tree depth
+
+   Efficient markup improves:
+   - Time to DOMContentLoaded
+   - Layout stability
+   - Memory usage of DOM tree
+
+4. **Accessibility**
+   - Accessibility APIs do not see “tags”
+   - They interact with **elements in the accessibility tree**
+
+   Examples:
+   - `<button>` tag → becomes a **button element role**
+   - `<h1>` tag → becomes a **heading landmark**
+   - `<a>` tag → becomes a **link element**
+
+   If tags are misused (e.g., `<div>` instead of `<button>`), accessibility must be manually patched with ARIA, which is less reliable than native elements.
+
+**Code Example:**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tags vs Elements</title>
+  </head>
+
+  <body>
+    <!-- Tags -->
+    <!-- <p> and </p> are tags -->
+
+    <!-- Element -->
+    <p class="message">Hello world</p>
+
+    <!-- Another element -->
+    <a href="https://example.com">Visit site</a>
+
+    <!-- Void element (only one tag, still an element) -->
+    <img src="photo.jpg" alt="Example image" />
+  </body>
+</html>
+```
+
+**Browser Support:**
+
+- All browsers interpret tags during parsing to create DOM elements
+- Invalid or missing tags are auto-corrected by HTML parser (forgiving syntax model)
+- Modern DOM APIs operate on **elements, not tags**
+
+**Common Pitfalls:**
+
+1. **Thinking tags exist at runtime** → they don’t; only elements exist in the DOM
+2. **Confusing element with inner text** → element includes structure + content
+3. **Ignoring void elements** → they are elements but have no closing tags
+
+## Question 10. What are attributes in HTML?
+
+> HTML attributes are **key-value pairs added to tags** that provide additional information about an element, such as behavior, identity, accessibility, or configuration (e.g., `class`, `id`, `href`, `alt`). They modify how an element behaves or is interpreted, but are not part of its visible content.
+
+**Production Implementation:**
+
+1. **HTML5.3 Standard**
+   Reference: [https://html.spec.whatwg.org/multipage/dom.html#attributes](https://html.spec.whatwg.org/multipage/dom.html#attributes)
+   In the HTML living standard, attributes are defined as **name-value pairs associated with elements in the DOM**, influencing rendering, behavior, and accessibility.
+
+2. **Semantic Approach**
+
+   ### Anatomy of attributes
+
+   ```html id="attr-example"
+   <a href="https://example.com" target="_blank" rel="noopener"> Visit site </a>
+   ```
+
+   - `href` → defines destination (behavior)
+   - `target` → controls navigation behavior
+   - `rel` → security + relationship metadata
+
+   ### Common attribute categories
+
+   **1. Global attributes (usable on most elements)**
+   - `id` → unique identifier
+   - `class` → styling/hooks
+   - `data-*` → custom data storage
+   - `title` → tooltip/accessibility hint
+   - `lang` → language declaration
+
+   **2. Element-specific attributes**
+   - `<img src="..." alt="...">`
+   - `<input type="email" required>`
+   - `<a href="...">`
+
+   #### 3. Boolean attributes
+
+   Presence = true:
+
+   ```html id="bool-attr"
+   <input type="checkbox" checked />
+   ```
+
+   No value needed (or value equals name in legacy HTML).
+
+3. **Performance**
+
+   Attributes can directly impact performance:
+   - `loading="lazy"` → defers image loading, improves LCP
+   - `defer` / `async` (script attributes) → prevent render blocking
+   - `fetchpriority="high"` → optimizes critical resource loading
+   - Excessive DOM attributes → slightly increase memory footprint
+
+   Efficient attribute usage improves:
+   - First Contentful Paint (FCP)
+   - Largest Contentful Paint (LCP)
+   - Network prioritization
+
+4. **Accessibility**
+
+   Attributes are critical for accessibility:
+   - `alt` → describes images for screen readers
+   - `aria-*` → enhances or modifies accessibility semantics
+   - `for` (in `<label>`) → associates label with input
+   - `tabindex` → controls keyboard navigation
+   - `role` → defines element purpose when semantics are insufficient
+
+   Example:
+
+   ```html id="accessibility-attr"
+   <img src="chart.png" alt="Sales growth chart for 2026" />
+
+   <label for="email">Email</label>
+   <input id="email" type="email" required aria-describedby="email-help" />
+   ```
+
+**Code Example:**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML Attributes</title>
+  </head>
+
+  <body>
+    <!-- Global attributes -->
+    <h1 id="main-title" class="title">HTML Attributes</h1>
+
+    <!-- Link attributes -->
+    <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+      External Link
+    </a>
+
+    <!-- Image attributes (accessibility-critical) -->
+    <img src="hero.jpg" alt="Developer working on laptop" loading="lazy" />
+
+    <!-- Form attributes -->
+    <form>
+      <label for="email">Email</label>
+      <input id="email" type="email" required placeholder="Enter your email" />
+    </form>
+
+    <!-- Custom data attributes -->
+    <button data-action="submit-form">Submit</button>
+  </body>
+</html>
+```
+
+**Browser Support:**
+
+- All standard HTML attributes are universally supported
+- `data-*` attributes are fully supported in all modern browsers
+- ARIA attributes supported in all major assistive technology ecosystems
+
+**Common Pitfalls:**
+
+1. **Using non-standard attributes without `data-*`** → invalid HTML, unpredictable behavior
+2. **Missing `alt` on images** → accessibility failure (WCAG violation)
+3. **Overusing ARIA instead of native attributes** → reduces accessibility quality
+4. **Misusing boolean attributes (`checked="false"`)** → still evaluates as true
