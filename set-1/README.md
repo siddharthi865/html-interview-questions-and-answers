@@ -1,27 +1,28 @@
 # Set 1
 
-| S.No. | Question                                                                                                          |
-| ----- | ----------------------------------------------------------------------------------------------------------------- |
-| 1.    | [What is HTML?](#question-1-what-is-html)                                                                         |
-| 2.    | [What does HTML stand for?](#question-2-what-does-html-stand-for)                                                 |
-| 3.    | [What is the difference between HTML and HTML5?](#question-3-what-is-the-difference-between-html-and-html5)       |
-| 4.    | [What is the basic structure of an HTML document?](#question-4-what-is-the-basic-structure-of-an-html-document)   |
-| 5.    | [What is the purpose of `<!DOCTYPE html>`?](#question-5-what-is-the-purpose-of-doctype-html)                      |
-| 6.    | [What is the difference between `<head>` and `<body>`?](#question-6-what-is-the-difference-between-head-and-body) |
-| 7.    | [What are HTML elements?](#question-7-what-are-html-elements)                                                     |
-| 8.    | [What are HTML tags?](#question-8-what-are-html-tags)                                                             |
-| 9.    | [What is the difference between tags and elements?](#question-9-what-is-the-difference-between-tags-and-elements) |
-| 10.   | [What are attributes in HTML?](#question-10-what-are-attributes-in-html)                                          |
-| 11.   | [What are heading tags in HTML?](#question-11-what-are-heading-tags-in-html)                                      |
-| 12.   | [What is the difference between `<p>` and `<span>`?](#question-12-what-is-the-difference-between-p-and-span)      |
-| 13.   | [What is the difference between `<div>` and `<span>`?](#question-13-what-is-the-difference-between-div-and-span)  |
-| 14.   | [What are block-level elements?](#question-14-what-are-block-level-elements)                                      |
-| 15.   | [What are inline elements?](#question-15-what-are-inline-elements)                                                |
-| 16.   | [What is the difference between `<b>` and `<strong>`?](#question-16-what-is-the-difference-between-b-and-strong)  |
-| 17.   | [What is the difference between `<i>` and `<em>`?](#question-17-what-is-the-difference-between-i-and-em)          |
-| 18.   | [What is the purpose of `<br>`?](#question-18-what-is-the-purpose-of-br)                                          |
-| 19.   | [What is the purpose of `<hr>`?](#question-19-what-is-the-purpose-of-hr)                                          |
-| 20.   | [What is the use of the `<pre>` tag?](#question-20-what-is-the-use-of-the-pre-tag)                                |
+| S.No. | Question                                                                                                                                                                              |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1.    | [What is HTML?](#question-1-what-is-html)                                                                                                                                             |
+| 2.    | [What does HTML stand for?](#question-2-what-does-html-stand-for)                                                                                                                     |
+| 3.    | [What is the difference between HTML and HTML5?](#question-3-what-is-the-difference-between-html-and-html5)                                                                           |
+| 4.    | [What is the basic structure of an HTML document?](#question-4-what-is-the-basic-structure-of-an-html-document)                                                                       |
+| 5.    | [What is the purpose of `<!DOCTYPE html>`?](#question-5-what-is-the-purpose-of-doctype-html)                                                                                          |
+| 6.    | [What is the difference between `<head>` and `<body>`?](#question-6-what-is-the-difference-between-head-and-body)                                                                     |
+| 7.    | [What are HTML elements?](#question-7-what-are-html-elements)                                                                                                                         |
+| 8.    | [What are HTML tags?](#question-8-what-are-html-tags)                                                                                                                                 |
+| 9.    | [What is the difference between tags and elements?](#question-9-what-is-the-difference-between-tags-and-elements)                                                                     |
+| 10.   | [What are attributes in HTML?](#question-10-what-are-attributes-in-html)                                                                                                              |
+| 11.   | [What are heading tags in HTML?](#question-11-what-are-heading-tags-in-html)                                                                                                          |
+| 12.   | [What is the difference between `<p>` and `<span>`?](#question-12-what-is-the-difference-between-p-and-span)                                                                          |
+| 13.   | [What is the difference between `<div>` and `<span>`?](#question-13-what-is-the-difference-between-div-and-span)                                                                      |
+| 14.   | [What are block-level elements?](#question-14-what-are-block-level-elements)                                                                                                          |
+| 15.   | [What are inline elements?](#question-15-what-are-inline-elements)                                                                                                                    |
+| 16.   | [What is the difference between `<b>` and `<strong>`?](#question-16-what-is-the-difference-between-b-and-strong)                                                                      |
+| 17.   | [What is the difference between `<i>` and `<em>`?](#question-17-what-is-the-difference-between-i-and-em)                                                                              |
+| 18.   | [What is the purpose of `<br>`?](#question-18-what-is-the-purpose-of-br)                                                                                                              |
+| 19.   | [What is the purpose of `<hr>`?](#question-19-what-is-the-purpose-of-hr)                                                                                                              |
+| 20.   | [What is the use of the `<pre>` tag?](#question-20-what-is-the-use-of-the-pre-tag)                                                                                                    |
+| 21.   | [Explain how HTML differs from CSS and JavaScript in the browser rendering pipeline](#question-21-explain-how-html-differs-from-css-and-javascript-in-the-browser-rendering-pipeline) |
 
 ## Question 1. What is HTML?
 
@@ -2138,3 +2139,241 @@ function add(a, b) {
 2. **Ignoring `<code>` inside `<pre>` for code content** → reduces semantic clarity
 3. **Large unoptimized `<pre>` blocks** → can affect rendering performance
 4. **Assuming `<pre>` is only for code** → it can be used for any preformatted text
+
+## Question 21. Explain how HTML differs from CSS and JavaScript in the browser rendering pipeline
+
+> HTML defines the **structure and semantic content** of a page, CSS defines its **presentation and layout**, and JavaScript controls **behavior and dynamic updates**. During the browser rendering pipeline, HTML builds the DOM, CSS builds the CSSOM, and JavaScript can modify both before the browser generates the render tree and paints pixels to the screen.
+
+**Production Implementation:**
+
+1. **HTML5.3 Standard**
+   Reference:
+   - HTML: [https://html.spec.whatwg.org/multipage/](https://html.spec.whatwg.org/multipage/)
+   - DOM parsing model: [https://html.spec.whatwg.org/multipage/parsing.html](https://html.spec.whatwg.org/multipage/parsing.html)
+
+   The browser processes:
+   1. HTML → DOM tree
+   2. CSS → CSSOM tree
+   3. DOM + CSSOM → Render Tree
+   4. Layout → Paint → Composite
+
+2. **Semantic Approach**
+
+   ### HTML → Structure Layer
+
+   HTML provides:
+   - Semantic meaning
+   - Accessibility structure
+   - Document hierarchy
+
+   Example:
+
+   ```html id="html-structure"
+   <main>
+     <article>
+       <h1>Article Title</h1>
+       <p>Content here...</p>
+     </article>
+   </main>
+   ```
+
+   The browser parses this into the **DOM (Document Object Model)**.
+
+   ### CSS → Presentation Layer
+
+   CSS controls:
+   - Colors
+   - Layout
+   - Spacing
+   - Animations
+   - Responsive behavior
+
+   Example:
+
+   ```css id="css-presentation"
+   article {
+     max-width: 60ch;
+     margin: auto;
+   }
+   ```
+
+   The browser parses CSS into the **CSSOM (CSS Object Model)**.
+
+   ### JavaScript → Behavior Layer
+
+   JavaScript:
+   - Handles interactions
+   - Modifies DOM/CSSOM dynamically
+   - Fetches data
+   - Updates UI in real time
+
+   Example:
+
+   ```javascript id="js-behavior"
+   document.querySelector("h1").textContent = "Updated Title";
+   ```
+
+3. **Performance**
+
+   ### Rendering Pipeline Overview
+
+   ```text
+   HTML → DOM
+   CSS → CSSOM
+   DOM + CSSOM → Render Tree
+   Render Tree → Layout
+   Layout → Paint
+   Paint → Composite
+   ```
+
+   **HTML performance considerations**
+   - Large DOM trees slow parsing/layout
+   - Semantic structure improves browser optimization
+   - Streaming parser renders progressively
+
+   Best practices:
+   - Keep DOM shallow
+   - Use semantic elements
+   - Minimize unnecessary wrappers
+
+   **CSS performance considerations**
+   - CSS is render-blocking by default
+   - Complex selectors increase style recalculation cost
+   - Layout-triggering properties can cause reflows
+
+   Best practices:
+   - Inline critical CSS
+   - Use `contain` and container queries wisely
+   - Avoid expensive layout thrashing
+
+   **JavaScript performance considerations**
+   - JS can block HTML parsing unless `defer`/`async`
+   - DOM mutations can trigger:
+     - style recalculation
+     - layout
+     - repaint
+
+   Best practices:
+
+   ```html id="defer-script"
+   <script src="app.js" defer></script>
+   ```
+
+   - Use requestAnimationFrame for visual updates
+   - Batch DOM reads/writes
+   - Avoid synchronous layout thrashing
+
+4. **Accessibility**
+
+   ### HTML
+
+   Primary accessibility foundation:
+   - Semantic tags
+   - Headings
+   - Forms
+   - Landmarks
+
+   ### CSS
+
+   Affects accessibility indirectly:
+   - Contrast ratios
+   - Focus visibility
+   - Reduced motion support
+
+   Example:
+
+   ```css id="reduced-motion"
+   @media (prefers-reduced-motion: reduce) {
+     * {
+       animation: none;
+     }
+   }
+   ```
+
+   ### JavaScript
+
+   Enhances accessibility dynamically:
+   - Focus management
+   - Live regions
+   - Keyboard interactions
+
+   Example:
+
+   ```html id="aria-live"
+   <div aria-live="polite"></div>
+   ```
+
+**Code Example:**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Rendering Pipeline Example</title>
+
+    <!-- CSS: Presentation layer -->
+    <style>
+      body {
+        font-family: system-ui;
+        margin: 2rem;
+      }
+
+      .card {
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+    </style>
+
+    <!-- JS: Behavior layer -->
+    <script defer>
+      window.addEventListener("DOMContentLoaded", () => {
+        document.querySelector("#status").textContent =
+          "JavaScript updated this content.";
+      });
+    </script>
+  </head>
+
+  <body>
+    <!-- HTML: Structure layer -->
+    <main>
+      <article class="card">
+        <h1>Browser Rendering Pipeline</h1>
+
+        <p id="status">Initial HTML content.</p>
+      </article>
+    </main>
+  </body>
+</html>
+```
+
+**Browser Support:**
+
+- DOM/CSSOM/render tree pipeline standardized across modern browsers
+- HTML parser behavior highly consistent in Blink, WebKit, and Gecko engines
+- JavaScript execution integrated into parsing pipeline via event loop and task queues
+
+**Common Pitfalls:**
+
+1. **Blocking rendering with synchronous JavaScript** → use `defer` or `async`
+2. **Massive DOM trees from poor HTML structure** → slows layout and paint
+3. **Expensive CSS selectors and layout-triggering animations** → causes reflows/repaints
+4. **Frequent JS DOM mutations** → layout thrashing and poor FPS
+
+### Interview-Level Mental Model
+
+| Technology | Responsibility        | Browser Output      |
+| ---------- | --------------------- | ------------------- |
+| HTML       | Structure & semantics | DOM                 |
+| CSS        | Styling & layout      | CSSOM               |
+| JavaScript | Behavior & updates    | DOM/CSSOM mutations |
+
+Final render process:
+
+```text
+DOM + CSSOM = Render Tree
+Render Tree → Layout → Paint → Composite
+```
