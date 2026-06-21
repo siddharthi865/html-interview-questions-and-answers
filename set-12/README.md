@@ -25,6 +25,161 @@
 
 ## Question 1. How do you create a mailto link?
 
+# Short answer
+
+A **mailto link** is created using the `mailto:` URL scheme in the `href` attribute of an `<a>` element. Clicking it attempts to open the user's default email client with a new email draft.
+
+```html
+<a href="mailto:hello@example.com">Email us</a>
+```
+
+---
+
+# Explanation
+
+The `mailto:` protocol instructs the browser to launch the user's configured email application (such as Outlook, Apple Mail, Thunderbird, or a webmail client registered as the default handler).
+
+Basic syntax:
+
+```html
+<a href="mailto:recipient@example.com">Send Email</a>
+```
+
+You can also prefill email fields using query parameters:
+
+- `subject` – Email subject
+- `body` – Email body
+- `cc` – Carbon copy recipients
+- `bcc` – Blind carbon copy recipients
+
+Example:
+
+```text
+mailto:john@example.com?subject=Meeting&body=Hello%20John
+```
+
+Multiple parameters are separated with `&`.
+
+Example:
+
+```text
+mailto:john@example.com?subject=Interview&cc=hr@example.com&body=Hello
+```
+
+Special characters and spaces must be URL-encoded:
+
+- Space → `%20`
+- New line → `%0A`
+- `&` → `%26`
+
+### Browser behavior
+
+- The browser does **not** send the email.
+- It only opens the user's configured email application.
+- If no email client is configured, the link may fail or prompt the user to choose one.
+
+---
+
+# Example
+
+```html
+<a
+  href="mailto:jobs@example.com?subject=Frontend%20Developer%20Application&body=Hello%20Team,%0A%0AI%20would%20like%20to%20apply%20for%20the%20Frontend%20Developer%20role.%0A"
+>
+  Apply via Email
+</a>
+```
+
+> This example works without JavaScript and progressively enhances naturally.
+
+---
+
+# Accessibility & SEO
+
+### Accessibility
+
+- Use descriptive link text instead of generic text like "Click here."
+
+```html
+<a href="mailto:support@example.com">Email customer support</a>
+```
+
+- Keyboard accessible by default.
+- Screen readers announce it as a link.
+- No ARIA attributes are normally required.
+
+### SEO
+
+- Search engines generally do **not** treat `mailto:` links as navigational links.
+- Publishing plain email addresses may increase spam harvesting risk.
+- Consider using a contact form when appropriate.
+
+---
+
+# Integration & Trade-offs
+
+### Progressive enhancement
+
+- Works without JavaScript.
+- Lightweight and supported across browsers.
+
+### Client-side frameworks
+
+React:
+
+```jsx
+<a href="mailto:hello@example.com">Contact</a>
+```
+
+Vue/Angular:
+
+```html
+<a :href="'mailto:' + email">Contact</a>
+```
+
+or
+
+```html
+<a [href]="'mailto:' + email">Contact</a>
+```
+
+### Server-side rendering
+
+- Fully compatible with SSR since it is plain HTML.
+- No hydration or JavaScript required.
+
+### Trade-offs
+
+**Advantages**
+
+- Very simple.
+- No backend required.
+- Opens the user's preferred email client.
+
+**Disadvantages**
+
+- Depends on the user having a configured email client.
+- Limited customization.
+- Cannot validate submissions or handle attachments like a server-backed form can.
+- Exposes email addresses to potential scraping.
+
+---
+
+# Testing & Validation
+
+- Verify the generated `mailto:` URL is correctly URL-encoded.
+- Test on different operating systems and browsers to ensure the expected email client opens.
+- Run accessibility audits with tools like **axe DevTools** or **Lighthouse** to confirm descriptive link text and keyboard accessibility.
+- Validate HTML using the WHATWG HTML checker.
+
+---
+
+# Pitfalls
+
+- **Don't forget URL encoding** (`%20`, `%0A`, etc.) for subjects and bodies.
+- **Avoid generic link text** like "Click here"; describe the destination or action.
+- **Don't rely solely on `mailto:`** for business-critical communication, since it depends on the user's local email setup.
+
 ## Question 2. How do you create a phone dial link?
 
 ## Question 3. How do you open a link in the same tab explicitly?
