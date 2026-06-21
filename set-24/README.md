@@ -25,6 +25,146 @@
 
 ## Question 1. What is aria-current?
 
+# Short answer
+
+`aria-current` is an **ARIA state** that tells assistive technologies which item in a group represents the **current** item. It is commonly used in navigation menus, breadcrumbs, pagination, calendars, and step indicators so screen reader users know where they are.
+
+Unlike `aria-selected`, which indicates the currently selected item in a widget (such as a tab or listbox), `aria-current` indicates the item that represents the user's **current location or context**.
+
+---
+
+# Explanation
+
+The `aria-current` attribute is applied to **one element within a related set**. Screen readers announce that element as the current one, helping users understand their position.
+
+Common values include:
+
+| Value             | Use case                                                    |
+| ----------------- | ----------------------------------------------------------- |
+| `page`            | Current page in site navigation or pagination (most common) |
+| `step`            | Current step in a multi-step form or wizard                 |
+| `location`        | Current location on a map or route                          |
+| `date`            | Today's date in a calendar                                  |
+| `time`            | Current time in a timetable                                 |
+| `true`            | Current item when no specific type applies                  |
+| `false` (default) | Item is not current                                         |
+
+For example:
+
+- Navigation menu → current page
+- Breadcrumb → current page
+- Pagination → current page number
+- Checkout wizard → current step
+- Calendar → today's date
+
+Only **one item in a related group** should usually have `aria-current`.
+
+---
+
+# Example
+
+```html
+<nav aria-label="Main navigation">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/blog" aria-current="page">Blog</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
+</nav>
+```
+
+A screen reader may announce:
+
+> "Blog, current page, link."
+
+Another example for a checkout wizard:
+
+```html
+<ol>
+  <li>Cart</li>
+  <li aria-current="step">Shipping</li>
+  <li>Payment</li>
+  <li>Confirmation</li>
+</ol>
+```
+
+---
+
+# Accessibility & SEO
+
+### Accessibility
+
+- Use `aria-current` to communicate the user's **current location**, not selection.
+- Only one item in a related set should typically be marked as current.
+- Common landmarks:
+  - `<nav>` for navigation
+  - `<ol>` for breadcrumbs and step indicators
+
+- No keyboard behavior is added by `aria-current`; it is purely semantic.
+- Prefer semantic HTML first, then enhance it with `aria-current` where appropriate.
+
+### SEO
+
+- `aria-current` has **no direct SEO impact**.
+- Semantic structures (`<nav>`, `<ol>`, proper heading hierarchy) improve document structure, which can indirectly benefit search engines and accessibility.
+
+---
+
+# Integration & Trade-offs
+
+### CSS
+
+You can style the current item using an attribute selector:
+
+```css
+a[aria-current="page"] {
+  font-weight: bold;
+  text-decoration: underline;
+}
+```
+
+This keeps styling synchronized with accessibility semantics.
+
+### JavaScript
+
+When navigation changes dynamically, update `aria-current` so only the active item has it.
+
+### React/Vue/Angular
+
+Most routing libraries handle this automatically:
+
+- React Router's `NavLink` can set `aria-current="page"` for the active route.
+- Similar functionality exists in Vue Router and Angular Router.
+
+### SSR vs SPA
+
+- **Server-side rendering (SSR):** Render the correct `aria-current` on the server based on the requested URL.
+- **Single-page applications (SPAs):** Update `aria-current` whenever client-side routing changes.
+
+### Progressive Enhancement
+
+Even if JavaScript is disabled, server-rendered navigation with `aria-current` remains accessible.
+
+---
+
+# Testing & Validation
+
+- Verify that only one item in a navigation or breadcrumb has `aria-current`.
+- Test with screen readers such as NVDA, VoiceOver, or JAWS to confirm the current item is announced.
+- Run accessibility audits using:
+  - axe DevTools
+  - Lighthouse
+
+- Validate HTML to ensure the surrounding semantic structure is correct.
+
+---
+
+# Pitfalls
+
+- **Don't use `aria-current` instead of `aria-selected`.** They represent different concepts.
+- **Don't mark multiple items as current** within the same navigation or step sequence unless the UI genuinely has multiple current items.
+- **Don't rely solely on visual styling.** Keep `aria-current` synchronized with the visible active state.
+
 ## Question 2. What is aria-expanded lifecycle?
 
 ## Question 3. What is aria-controls relationship?
