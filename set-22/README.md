@@ -25,6 +25,128 @@
 
 ## Question 1. What is constraint validation candidate?
 
+# Short answer
+
+A **constraint validation candidate** is a form control that the browser considers eligible for HTML's built-in **Constraint Validation API**. Only validation candidates participate in native validation (`required`, `pattern`, `min`, `max`, etc.). Controls that are **barred from constraint validation** are ignored during validation.
+
+---
+
+# Explanation
+
+The HTML specification defines whether a form-associated element is a **candidate for constraint validation** (`willValidate` is `true`) or not (`willValidate` is `false`).
+
+A control is typically a validation candidate if it:
+
+- Is associated with a form.
+- Supports constraint validation.
+- Is not disabled.
+- Is not barred from constraint validation.
+
+Examples of controls that are **not validation candidates** include:
+
+- `<input type="hidden">`
+- Disabled controls (`disabled`)
+- `<button>` elements
+- `<output>`
+- Elements inside a disabled `<fieldset>` (with some exceptions)
+- Controls that the specification explicitly bars from constraint validation
+
+JavaScript exposes this through the `willValidate` property:
+
+```javascript
+const input = document.querySelector("input");
+console.log(input.willValidate); // true or false
+```
+
+If `willValidate` is `false`, methods like `checkValidity()` will not report validation errors for that control because the browser skips it.
+
+---
+
+# Example
+
+```html
+<form>
+  <label>
+    Name
+    <input type="text" required />
+  </label>
+
+  <input type="hidden" required />
+
+  <label>
+    Disabled Email
+    <input type="email" required disabled />
+  </label>
+
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+  const controls = document.querySelectorAll("input");
+
+  controls.forEach((control) => {
+    console.log(control.type, "willValidate:", control.willValidate);
+  });
+</script>
+```
+
+**Expected output:**
+
+```
+text willValidate: true
+hidden willValidate: false
+email willValidate: false
+```
+
+The text input participates in validation, while the hidden and disabled inputs do not.
+
+---
+
+# Accessibility & SEO
+
+### Accessibility
+
+- Native constraint validation provides built-in error handling and integrates with assistive technologies better than custom validation alone.
+- Pair inputs with `<label>` elements and provide clear validation messages.
+- When using custom validation (`setCustomValidity()`), ensure errors are announced (e.g., via `aria-live`) and that invalid fields expose `aria-invalid="true"` if you override native behavior.
+- Do not disable native validation (`novalidate`) unless you replace it with an accessible alternative.
+
+### SEO
+
+- Constraint validation has **no direct SEO impact**.
+- It improves form completion and user experience, which can indirectly improve engagement metrics.
+
+---
+
+# Integration & Trade-offs
+
+- **CSS:** Use the `:valid`, `:invalid`, `:required`, and `:optional` pseudo-classes for styling validation states without JavaScript.
+- **JavaScript:** Use `checkValidity()`, `reportValidity()`, `setCustomValidity()`, and `willValidate` to integrate native validation with custom logic.
+- **Frameworks (React/Vue/Angular):**
+  - Many applications implement validation in JavaScript, but native HTML validation remains useful as a baseline.
+  - Native validation can reduce duplicated logic and provides progressive enhancement.
+
+- **SSR vs SPA:**
+  - Server-side validation is always required because client-side validation can be bypassed.
+  - Native constraint validation improves UX but should complement—not replace—server-side validation.
+
+---
+
+# Testing & Validation
+
+- Verify `element.willValidate` for controls that should or should not participate in validation.
+- Test with `checkValidity()` and `reportValidity()`.
+- Validate markup with the HTML validator and run accessibility audits using tools such as axe DevTools and Lighthouse.
+- Test keyboard-only interactions and screen reader announcements for validation errors.
+
+---
+
+# Pitfalls
+
+- Assuming every form control is validated—elements like `type="hidden"` and disabled controls are not validation candidates.
+- Relying solely on client-side validation instead of validating on the server.
+- Disabling native validation (`novalidate`) without implementing an accessible replacement.
+
 ## Question 2. What is labelable element?
 
 ## Question 3. What is listed form-associated element?
