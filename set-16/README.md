@@ -25,6 +25,141 @@
 
 ## Question 1. What is the difference between HTML Living Standard and HTML5?
 
+# Short answer
+
+**HTML5** refers to the major version of HTML that was standardized as a snapshot (primarily the W3C Recommendation published in 2014). **HTML Living Standard** is the continuously updated specification maintained by WHATWG, where new HTML features, APIs, and clarifications are added incrementally instead of waiting for versioned releases.
+
+In modern web development, when people say "HTML5," they usually mean the modern HTML platform, but technically browsers implement the **HTML Living Standard**.
+
+---
+
+# Explanation
+
+Historically, HTML evolved through versioned specifications (HTML 2.0, HTML 4.01, XHTML, HTML5).
+
+### HTML5
+
+- A **versioned specification**.
+- Published as a stable recommendation by W3C (2014).
+- Represents a snapshot of the language at a specific point in time.
+- Introduced major features such as:
+  - Semantic elements (`<header>`, `<main>`, `<article>`, `<section>`)
+  - Native multimedia (`<audio>`, `<video>`)
+  - Canvas
+  - Improved forms
+  - New APIs
+
+### HTML Living Standard
+
+- Maintained by **WHATWG**.
+- Continuously updated instead of creating HTML6 or HTML7.
+- Browser vendors collaborate on changes as the web evolves.
+- Reflects what browsers actually implement.
+- Includes ongoing improvements, bug fixes, clarifications, and integration with modern web APIs.
+
+Today, Chrome, Firefox, Safari, and Edge track the **Living Standard**, making it the authoritative specification for modern HTML.
+
+---
+
+# Example
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Modern HTML</title>
+  </head>
+  <body>
+    <main>
+      <article>
+        <h1>HTML Living Standard Example</h1>
+        <p>This document uses semantic HTML supported by modern browsers.</p>
+      </article>
+    </main>
+  </body>
+</html>
+```
+
+This markup is valid under both HTML5 and the HTML Living Standard. The Living Standard mainly differs in how the specification evolves over time rather than requiring different syntax.
+
+---
+
+# Accessibility & SEO
+
+### Accessibility
+
+- Semantic elements introduced with HTML5 remain fundamental in the Living Standard.
+- Use landmarks like:
+  - `<header>`
+  - `<nav>`
+  - `<main>`
+  - `<aside>`
+  - `<footer>`
+
+- Prefer native HTML controls over ARIA where possible ("No ARIA is better than bad ARIA").
+- Keyboard behavior is defined by native HTML semantics and enhanced by browser implementations that follow the Living Standard.
+
+### SEO
+
+- Search engines benefit from semantic HTML regardless of whether you call it HTML5 or the Living Standard.
+- Continue to use:
+  - `<title>`
+  - `<meta name="description">`
+  - Proper heading hierarchy
+  - Canonical URLs
+  - Semantic content structure
+
+- The Living Standard may clarify parsing and metadata behavior, but SEO best practices remain largely unchanged.
+
+---
+
+# Integration & Trade-offs
+
+### CSS
+
+- CSS selectors target semantic elements identically in HTML5 and the Living Standard.
+- New semantic elements improve maintainability and readability.
+
+### JavaScript
+
+- Modern DOM APIs are specified alongside the Living Standard.
+- Features are added incrementally without waiting for a new HTML version.
+
+### Frameworks (React/Vue/Angular)
+
+- JSX templates ultimately render standard HTML.
+- Frameworks rely on browser implementations of the Living Standard.
+- Continue using semantic HTML instead of generic `<div>` wrappers for better accessibility and SEO.
+
+### Server-Side Rendering vs SPA
+
+- SSR benefits from semantic HTML because content is immediately available to users and search engines.
+- SPAs should still render semantic HTML and progressively enhance with JavaScript.
+- The Living Standard supports progressive enhancement by ensuring HTML remains functional without JavaScript where feasible.
+
+---
+
+# Testing & Validation
+
+- Validate markup using the WHATWG-compatible HTML validator (Nu Validator).
+- Run accessibility audits with:
+  - axe DevTools
+  - Lighthouse
+
+- Test with keyboard-only navigation and screen readers.
+- Verify that semantic landmarks and headings are correctly exposed in the accessibility tree.
+- Check browser compatibility for newer features before relying on them in production.
+
+---
+
+# Pitfalls
+
+- **Assuming HTML5 is the latest specification.** Browsers now follow the continuously updated Living Standard.
+- **Using "HTML5" to refer to JavaScript APIs.** Many APIs commonly labeled "HTML5" (such as Geolocation or Web Storage) evolve independently of the core HTML specification.
+- **Ignoring browser support.** Even if a feature appears in the Living Standard, verify implementation across target browsers before using it.
+
 ## Question 2. Who maintains the HTML specification?
 
 ## Question 3. What is the purpose of the WHATWG?
