@@ -25,106 +25,176 @@
 
 ## Question 1. What is HTML?
 
-> HTML (HyperText Markup Language) is the standard semantic markup language used to structure content on the web. It defines the meaning and hierarchy of elements like headings, paragraphs, images, and interactive components so browsers can render accessible, machine-readable documents.
+# Short answer
 
-**Production Implementation:**
+**HTML (HyperText Markup Language)** is the standard markup language used to structure and describe the content of web pages. It defines elements such as headings, paragraphs, links, images, forms, tables, and semantic page regions, which browsers interpret and render. HTML provides the document structure, while CSS handles presentation and JavaScript adds behavior.
 
-1. **HTML5.3 Standard**
-   Reference: [https://html.spec.whatwg.org/multipage/](https://html.spec.whatwg.org/multipage/)
-   HTML is defined as a living standard by WHATWG, continuously evolving with modern web needs (not versioned like HTML4/5 in practice).
+---
 
-2. **Semantic Approach**
-   Modern HTML emphasizes meaning, not presentation:
-   - `<header>`, `<main>`, `<article>`, `<section>`, `<footer>` define structure
-   - `<h1>`–`<h6>` define document outline
-   - `<nav>` for navigation landmarks
-   - ARIA roles only when semantics are insufficient (e.g., `role="dialog"` fallback)
+# Explanation
 
-3. **Performance**
-   - Browser parses HTML incrementally (critical rendering path)
-   - Use `<link rel="preload">` for critical assets
-   - Use `loading="lazy"` for images/iframes
-   - Minimize DOM depth for faster layout & paint
-   - Defer non-critical scripts (`defer`, `async`)
+HTML is not a programming language; it is a **markup language** that describes the meaning and structure of content.
 
-4. **Accessibility**
-   - Semantic tags create built-in accessibility tree
-   - Proper heading hierarchy supports screen readers
-   - Landmarks (`<main>`, `<nav>`) improve navigation
-   - Use `alt` for images, `label` for form controls
-   - Ensure keyboard navigation support (focusable elements)
+Modern HTML (HTML Living Standard) emphasizes:
 
-**Code Example:**
+- **Semantics**: Elements convey meaning (`<header>`, `<nav>`, `<main>`, `<article>`, `<footer>`).
+- **Accessibility (a11y)**: Native HTML elements provide built-in keyboard support and screen-reader semantics.
+- **SEO**: Search engines rely heavily on semantic HTML to understand page content and hierarchy.
+- **Progressive Enhancement**: Core content remains accessible even if CSS or JavaScript fails.
+- **Interoperability**: HTML acts as the foundation upon which CSS, JavaScript, browsers, assistive technologies, and search engines operate.
+
+### HTML's role in the web stack
+
+| Technology     | Responsibility                       |
+| -------------- | ------------------------------------ |
+| HTML           | Structure and meaning                |
+| CSS            | Presentation and layout              |
+| JavaScript     | Behavior and interactivity           |
+| Browser        | Parses and renders HTML              |
+| Search Engines | Crawl and index HTML content         |
+| Screen Readers | Use HTML semantics to convey content |
+
+A browser parses HTML into a **DOM (Document Object Model)**, which CSS styles and JavaScript can manipulate.
+
+---
+
+# Example
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>What is HTML?</title>
-
-    <!-- Performance: preload critical font -->
-    <link
-      rel="preload"
-      href="/fonts/inter.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Website</title>
   </head>
-
   <body>
     <header>
-      <h1>Understanding HTML</h1>
-      <nav aria-label="Main navigation">
-        <a href="#definition">Definition</a>
-        <a href="#usage">Usage</a>
-      </nav>
+      <h1>Welcome to My Website</h1>
     </header>
 
-    <main id="definition">
+    <main>
       <article>
         <h2>What is HTML?</h2>
-        <p>
-          HTML is the standard markup language used to structure content on the
-          web.
-        </p>
-
-        <figure>
-          <img
-            src="html-structure.png"
-            alt="Diagram showing HTML document structure"
-            loading="lazy"
-          />
-          <figcaption>Basic structure of an HTML document</figcaption>
-        </figure>
+        <p>HTML provides the structure and meaning of web content.</p>
       </article>
-
-      <section id="usage">
-        <h2>Why it matters</h2>
-        <p>HTML provides semantic meaning, enabling accessibility and SEO.</p>
-      </section>
     </main>
 
     <footer>
-      <small>&copy; 2026 Web Standards</small>
+      <p>&copy; 2026 My Company</p>
     </footer>
   </body>
 </html>
 ```
 
-**Browser Support:**
+This example demonstrates semantic structure using `<header>`, `<main>`, `<article>`, and `<footer>`.
 
-- Universal support across all modern browsers
-- Semantic elements fully supported in all evergreen browsers
-- Progressive enhancement recommended for older environments (IE legacy ignored in modern specs)
+---
 
-**Common Pitfalls:**
+# Accessibility & SEO
 
-1. **Using divs everywhere instead of semantic tags** → hurts accessibility & SEO
-2. **Missing alt attributes on images** → breaks screen reader experience
-3. **Incorrect heading hierarchy (skipping h2/h3 levels)** → confuses document outline and assistive tech
+### Accessibility
+
+- Use semantic elements instead of generic `<div>` containers whenever possible.
+- Native HTML controls (`<button>`, `<input>`, `<select>`) provide built-in keyboard and screen-reader support.
+- Include the `lang` attribute on `<html>`.
+- Use proper heading hierarchy (`h1 → h2 → h3`).
+
+### SEO
+
+- Use a descriptive `<title>`.
+- Include meaningful headings.
+- Prefer semantic elements (`<article>`, `<section>`, `<nav>`).
+- Add metadata when appropriate (`meta description`, structured data, canonical URLs).
+
+Example SEO-related tags:
+
+```html
+<title>HTML Basics</title>
+<meta name="description" content="Learn the fundamentals of HTML." />
+```
+
+---
+
+# Integration & Trade-offs
+
+### HTML + CSS
+
+HTML provides structure while CSS controls appearance:
+
+```html
+<button>Save</button>
+```
+
+```css
+button {
+  padding: 0.5rem 1rem;
+}
+```
+
+### HTML + JavaScript
+
+JavaScript enhances behavior without changing the semantic foundation:
+
+```html
+<button id="saveBtn">Save</button>
+```
+
+```js
+document.getElementById("saveBtn").addEventListener("click", saveData);
+```
+
+### Frameworks
+
+- **React**: Uses JSX, which compiles to HTML-like DOM structures.
+- **Vue**: Template syntax maps to rendered HTML.
+- **Angular**: Component templates ultimately produce HTML in the browser.
+
+### SSR vs SPA
+
+**Server-Side Rendering (SSR)**
+
+- Better initial SEO and faster content visibility.
+- HTML arrives pre-rendered.
+
+**Single Page Applications (SPA)**
+
+- Rich client-side interactions.
+- May require hydration and additional SEO considerations.
+
+HTML remains the final rendered output regardless of framework choice.
+
+---
+
+# Testing & Validation
+
+### Validation
+
+Use the official validator:
+
+- WHATWG-compliant HTML validation
+- W3C Nu HTML Checker
+
+### Accessibility Testing
+
+- Axe DevTools
+- Lighthouse
+- Screen reader testing (NVDA, JAWS, VoiceOver)
+
+### Practical Checks
+
+- Verify heading hierarchy.
+- Ensure landmarks exist (`header`, `nav`, `main`, `footer`).
+- Test keyboard navigation.
+- Check page rendering without JavaScript.
+
+---
+
+# Pitfalls
+
+- Using `<div>` for everything instead of semantic elements.
+- Relying on JavaScript for content that should exist in the initial HTML.
+- Skipping heading levels or using headings purely for visual styling.
 
 ## Question 2. What does HTML stand for?
 
