@@ -25,6 +25,131 @@
 
 ## Question 1. What is the difference between vector and raster images?
 
+# Short answer
+
+**Vector images** are made from mathematical paths (points, lines, curves), so they can be scaled infinitely without losing quality. **Raster images** are made from pixels, so enlarging them beyond their original resolution causes pixelation and loss of detail.
+
+---
+
+# Explanation
+
+The main difference lies in **how the image is represented**.
+
+### Vector images
+
+- Built using **mathematical equations** describing shapes, lines, and curves.
+- **Resolution-independent**—they remain sharp at any size.
+- Usually have **smaller file sizes** for simple graphics.
+- Best for:
+  - Logos
+  - Icons
+  - Illustrations
+  - Diagrams
+  - SVG graphics
+
+Common formats:
+
+- **SVG** (web standard)
+- AI
+- EPS
+- PDF (can contain vector graphics)
+
+### Raster images
+
+- Made of a **grid of pixels**.
+- **Resolution-dependent**—quality depends on the number of pixels.
+- Enlarging beyond the original dimensions causes **blurriness or pixelation**.
+- Better for:
+  - Photographs
+  - Digital artwork
+  - Complex textures
+  - Images with millions of colors
+
+Common formats:
+
+- JPEG/JPG
+- PNG
+- GIF
+- WebP
+- AVIF
+- BMP
+
+### Comparison
+
+| Feature             | Vector                      | Raster                   |
+| ------------------- | --------------------------- | ------------------------ |
+| Representation      | Mathematical paths          | Pixels                   |
+| Scalability         | Infinite                    | Limited                  |
+| Quality when zoomed | Always sharp                | Becomes pixelated        |
+| Best for            | Logos, icons, illustrations | Photos, realistic images |
+| File size           | Small for simple graphics   | Depends on resolution    |
+| Editing             | Easy to resize/edit shapes  | Pixel-level editing      |
+
+---
+
+# Example
+
+```html
+<!-- Vector image -->
+<img src="logo.svg" alt="Company logo" width="150" height="150" />
+
+<!-- Raster image -->
+<img src="hero-photo.webp" alt="Mountain landscape" width="800" height="500" />
+```
+
+---
+
+# Accessibility & SEO
+
+- Always provide meaningful `alt` text for informative images.
+- Decorative images should use `alt=""`.
+- SVGs can include `<title>` and `<desc>` for additional accessibility when embedded inline.
+- Use modern formats like **WebP** or **AVIF** for raster images to improve performance.
+- Specify `width` and `height` attributes to reduce layout shifts (CLS).
+- Use responsive images (`srcset`, `sizes`) for raster images serving multiple resolutions.
+
+---
+
+# Integration & Trade-offs
+
+### CSS
+
+- SVGs scale perfectly with CSS (`width`, `height`, `transform`).
+- Raster images require higher-resolution assets for large displays (e.g., Retina).
+
+### JavaScript
+
+- Inline SVGs expose DOM elements that can be animated or manipulated with JavaScript.
+- Raster images can only be manipulated as a whole unless processed using `<canvas>` or image-processing libraries.
+
+### Frameworks (React/Vue/Angular)
+
+- SVGs can often be imported as components, making them easy to style and animate.
+- Raster images are typically imported as static assets and optimized during the build process.
+
+### SSR & Progressive Enhancement
+
+- SVGs render crisply immediately and integrate well with server-side rendering.
+- Raster images benefit from lazy loading (`loading="lazy"`), responsive image techniques, and CDN optimization.
+
+---
+
+# Testing & Validation
+
+- Use browser DevTools to verify image dimensions and file sizes.
+- Run **Lighthouse** to check image optimization opportunities.
+- Validate SVG markup if embedding inline.
+- Test raster images on high-DPI displays to ensure sufficient resolution.
+- Verify that all informative images have appropriate `alt` text using accessibility tools like axe.
+
+---
+
+# Pitfalls
+
+- **Using raster images for logos or icons**, resulting in blurry scaling.
+- **Using SVG for detailed photographs**, which can create unnecessarily large and complex files.
+- **Serving oversized raster images** instead of responsive image variants, increasing page load time.
+
 ## Question 2. When should you prefer SVG over PNG?
 
 ## Question 3. What are fallback mechanisms in `<video>`?
