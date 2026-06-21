@@ -25,6 +25,183 @@
 
 ## Question 1. What is the `loading="lazy"` attribute?
 
+# Short answer
+
+`loading="lazy"` is a native HTML attribute for elements like `<img>` and `<iframe>` that tells the browser to **defer loading offscreen resources until they are close to entering the viewport**. This reduces the initial page load time, saves bandwidth, and can improve performance metrics such as Largest Contentful Paint (LCP) when used appropriately.
+
+---
+
+# Explanation
+
+Lazy loading is a browser optimization that delays fetching non-critical resources until they are likely to be needed.
+
+Without lazy loading:
+
+- The browser starts downloading all images and iframes during page load.
+- Large pages with many images consume more bandwidth and delay rendering.
+
+With `loading="lazy"`:
+
+- Images and iframes below the fold are downloaded only when the user scrolls near them.
+- Above-the-fold content loads faster.
+- Browsers decide exactly when to fetch based on viewport distance and network conditions.
+
+Example behavior:
+
+```
+Page loads
+│
+├── Hero image → loads immediately
+├── Logo → loads immediately
+├── Image 25 screens below → delayed
+└── Footer iframe → delayed
+```
+
+Supported values:
+
+| Value   | Meaning                                                    |
+| ------- | ---------------------------------------------------------- |
+| `lazy`  | Delay loading until near the viewport                      |
+| `eager` | Load immediately (default behavior for critical resources) |
+
+Modern browsers implement native lazy loading without requiring JavaScript libraries.
+
+### When should you use it?
+
+Use `loading="lazy"` for:
+
+- Images below the fold
+- Blog images
+- Product gallery images
+- User-generated content
+- Embedded maps/videos
+- Long image-heavy pages
+
+Avoid using it for:
+
+- Hero images
+- Logo (if critical)
+- Above-the-fold content
+- LCP images
+
+Those should load eagerly.
+
+---
+
+# Example
+
+```html
+<main>
+  <h1>Travel Gallery</h1>
+
+  <img
+    src="hero.jpg"
+    alt="Mountain landscape"
+    width="1200"
+    height="600"
+    fetchpriority="high"
+  />
+
+  <section>
+    <h2>More Photos</h2>
+
+    <img
+      src="beach.jpg"
+      alt="Sunny beach"
+      width="800"
+      height="600"
+      loading="lazy"
+    />
+
+    <img
+      src="forest.jpg"
+      alt="Forest trail"
+      width="800"
+      height="600"
+      loading="lazy"
+    />
+  </section>
+</main>
+```
+
+**Notes:**
+
+- The hero image loads immediately.
+- Gallery images load lazily.
+- Including `width` and `height` helps browsers reserve layout space and prevents layout shifts.
+
+---
+
+# Accessibility & SEO
+
+### Accessibility
+
+- `loading="lazy"` **does not affect accessibility**.
+- Always provide meaningful `alt` text for informative images.
+- Decorative images should use `alt=""`.
+- Native lazy loading does not change keyboard navigation or screen reader behavior.
+
+### SEO
+
+- Search engines can index lazy-loaded images when implemented correctly, especially with native `loading="lazy"`.
+- Avoid lazy loading critical content that should be visible immediately.
+- Always specify:
+  - `src`
+  - `alt`
+  - `width`
+  - `height`
+
+These improve crawlability, accessibility, and visual stability.
+
+---
+
+# Integration & Trade-offs
+
+### CSS
+
+- Works independently of CSS.
+- Setting explicit dimensions (`width`/`height` or `aspect-ratio` in CSS) helps avoid cumulative layout shift (CLS).
+
+### JavaScript
+
+- Native lazy loading replaces many older JavaScript solutions based on the Intersection Observer API for common use cases.
+- JavaScript is still useful for advanced scenarios (custom thresholds, animations, placeholders, or analytics).
+
+### Frameworks
+
+- **React:** `<img loading="lazy" />`
+- **Vue:** `<img loading="lazy">`
+- **Angular:** `<img loading="lazy">`
+
+The attribute is passed through to the browser like standard HTML.
+
+### Server-side Rendering (SSR)
+
+- Works well with SSR because the browser decides when to fetch resources after receiving the HTML.
+- No extra JavaScript is required for basic lazy loading.
+
+### Progressive Enhancement
+
+- Browsers that support `loading="lazy"` benefit automatically.
+- Older browsers simply ignore the attribute and load images eagerly, so functionality is preserved.
+
+---
+
+# Testing & Validation
+
+- Validate HTML using the HTML Living Standard validator to ensure valid markup.
+- Use browser DevTools (Network panel) to confirm that offscreen images are fetched only when scrolling.
+- Run Lighthouse to verify performance improvements and identify if the LCP image is incorrectly lazy-loaded.
+- Use axe DevTools or similar accessibility tools to ensure images still have appropriate `alt` text and accessible markup.
+
+---
+
+# Pitfalls
+
+- **Don't lazy-load above-the-fold images**, especially the LCP (hero) image, as it can delay rendering and hurt Core Web Vitals.
+- **Always specify `width` and `height`** (or reserve space with CSS) to prevent layout shifts.
+- **Don't rely on lazy loading alone**—optimize image formats (e.g., WebP or AVIF), compress images, and use responsive images (`srcset`/`sizes`) where appropriate.
+
 ## Question 2. What is the `srcset` attribute in images?
 
 ## Question 3. What is the `sizes` attribute in `<img>`?
